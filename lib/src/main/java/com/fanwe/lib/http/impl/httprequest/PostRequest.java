@@ -49,13 +49,13 @@ public class PostRequest extends HttpRequestImpl implements IPostRequest
     protected IResponse doExecute() throws Exception
     {
         HttpRequest request = newHttpRequest(getUrl(), HttpRequest.METHOD_POST);
-        final Map<String, String> params = getParams().toMap();
+        final Map<String, Object> params = getParams().toMap();
 
         if (mListFile != null && !mListFile.isEmpty())
         {
-            for (Map.Entry<String, String> item : params.entrySet())
+            for (Map.Entry<String, Object> item : params.entrySet())
             {
-                request.part(item.getKey(), item.getValue());
+                request.part(item.getKey(), String.valueOf(item.getValue()));
             }
 
             for (FileRequestBody item : mListFile)

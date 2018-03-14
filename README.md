@@ -208,8 +208,8 @@ RequestManager.getInstance().setRequestIdentifierProvider(new IRequestIdentifier
         String identifier = null;
 
         //此处的clt和act为作者公司服务端标识接口的参数，故用这两个参数组合来生成请求标识
-        String ctl = request.getParam("ctl");
-        String act = request.getParam("act");
+        Object ctl = request.getParam("ctl");
+        Object act = request.getParam("act");
         if (ctl != null && act != null)
         {
             identifier = ctl + "," + act;
