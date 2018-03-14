@@ -29,18 +29,13 @@ new Thread(new Runnable()
 ## 异步请求
 
 * 正常回调：<br>
-`onPrepare(execute调用线程)->onStart(UI线程)->onSuccessBackground(非UI线程)->onSuccessBefore(UI线程)->onSuccess(UI线程)->onFinish(UI线程)`
-
-* 网络或者服务端等外部原因造成的异常：<br>
-`onPrepare(execute调用线程)->onStart(UI线程)->onError(UI线程)->onFinish(UI线程)`
-
-* onSuccessBackground中代码逻辑造成的异常：<br>
-`onPrepare(execute调用线程)->onStart(UI线程)->onSuccessBackground(非UI线程)->onError(UI线程)->onFinish(UI线程)`
+`onPrepare(请求发起所在线程)->onStart(UI线程)->onSuccessBackground(非UI线程)->onSuccessBefore(UI线程)->onSuccess(UI线程)->onFinish(UI线程)`
 
 ```java
-Request request = new PostRequest(URL) //创建请求对象
-        .param("ctl", "app").param("act", "init") //创建要提交的form数据
-        .setTag(TAG); //设置请求对应的tag，可用于取消请求对象
+IRequest request = new PostRequest();
+request.setUrl(URL); //设置请求地址
+request.param("ctl", "app").param("act", "init"); //设置请求参数
+request.setTag(TAG); //设置该请求的tag，可用于取消请求
 
 RequestHandler requestHandler = request.execute(new ModelRequestCallback<InitActModel>()
 {
@@ -48,36 +43,36 @@ RequestHandler requestHandler = request.execute(new ModelRequestCallback<InitAct
     public void onPrepare(Request request)
     {
         super.onPrepare(request);
-        //异步请求在被执行之前的准备回调，execute调用线程
+        //请求在被执行之前的准备回调(发起请求被调用的线程)
     }
 
     @Override
     public void onStart()
     {
         super.onStart();
-        //异步请求开始执行，ui线程
+        //请求开始执行(UI线程)
     }
 
     @Override
     public void onSuccessBackground() throws Exception
     {
         super.onSuccessBackground();
-        //成功回调，super里面回调了parseToModel方法把返回的内容转为实体，非ui线程
+        //成功回调，super里面回调了parseToModel方法把返回的内容转为实体，(非UI线程)
     }
 
     @Override
     public void onSuccess()
     {
-        //成功回调，ui线程
-        Response response = getResponse(); //获得返回结果对象
-        InitActModel model = getActModel(); //获得解析好的实体
+        //成功回调(UI线程)
+        IResponse response = getResponse(); //获得返回结果对象
+        InitActModel model = getActModel(); // 获得接口对应的实体
         Log.i(TAG, "onSuccess:" + model.getCity());
     }
 
     @Override
     protected InitActModel parseToModel(String content, Class<InitActModel> clazz)
     {
-        //把返回的内容转实体，非ui线程
+        //把返回的内容转实体(非UI线程)
         return new Gson().fromJson(content, clazz);
     }
 
@@ -85,21 +80,21 @@ RequestHandler requestHandler = request.execute(new ModelRequestCallback<InitAct
     public void onError(Exception e)
     {
         super.onError(e);
-        //异常回调，ui线程
+        //异常回调(UI线程)
     }
 
     @Override
     public void onCancel()
     {
         super.onCancel();
-        //异步请求被取消回调，ui线程
+        //请求被取消回调(UI线程)
     }
 
     @Override
     public void onFinish()
     {
         super.onFinish();
-        //结束回调，ui线程
+        //结束回调(UI线程)
     }
 });
 

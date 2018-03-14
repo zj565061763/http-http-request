@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.fanwe.lib.http.IRequest;
 import com.fanwe.lib.http.IResponse;
 import com.fanwe.lib.http.RequestManager;
 import com.fanwe.lib.http.callback.ModelRequestCallback;
@@ -31,16 +32,25 @@ public class AsyncRequestActivity extends AppCompatActivity
 
     public void onClickRequest(View view)
     {
-        new PostRequest().setUrl(URL).param("ctl", "app").param("act", "init") //设置要提交的参数
-                .setTag(TAG) //设置该请求对应的tag，可用于取消请求
-//                .executeSequence(mModelRequestCallback_0); // 异步请求，按顺序一个个执行
-                .execute(mModelRequestCallback_0);
+        IRequest request = new PostRequest();
+        request.setUrl(URL); //设置请求地址
+        request.param("ctl", "app").param("act", "init"); //设置请求参数
+        request.setTag(TAG); //设置该请求的tag，可用于取消请求
+
+        request.execute(mModelRequestCallback_0);
 //                .execute(RequestCallbackProxy.get(mModelRequestCallback_0, mModelRequestCallback_1)); //设置请求结果回调，可以设置多个回调
     }
 
     private ModelRequestCallback mModelRequestCallback_0 = new ModelRequestCallback<InitActModel>()
     {
         private long startTime;
+
+        @Override
+        public void onPrepare(IRequest request)
+        {
+            super.onPrepare(request);
+            Log.i(TAG, "onPrepare_0");
+        }
 
         @Override
         public void onStart()
@@ -67,7 +77,7 @@ public class AsyncRequestActivity extends AppCompatActivity
         public void onSuccess()
         {
             IResponse response = getResponse(); //获得返回结果对象
-            InitActModel model = getActModel();
+            InitActModel model = getActModel(); // 获得接口对应的实体
             Log.i(TAG, "onSuccess_0:" + model.getCity());
         }
 
@@ -95,6 +105,13 @@ public class AsyncRequestActivity extends AppCompatActivity
 
     private ModelRequestCallback mModelRequestCallback_1 = new ModelRequestCallback<InitActModel>()
     {
+        @Override
+        public void onPrepare(IRequest request)
+        {
+            super.onPrepare(request);
+            Log.i(TAG, "onPrepare_1");
+        }
+
         @Override
         public void onStart()
         {
