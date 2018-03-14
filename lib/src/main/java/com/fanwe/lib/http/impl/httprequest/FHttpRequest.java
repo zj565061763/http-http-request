@@ -6,7 +6,6 @@ import com.fanwe.lib.http.RequestManager;
 import com.fanwe.lib.http.utils.HttpLogger;
 
 import java.net.HttpCookie;
-import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,8 +73,7 @@ class FHttpRequest extends HttpRequest
     {
         try
         {
-            final URI uri = url().toURI();
-            final List<HttpCookie> listCookie = RequestManager.getInstance().getCookieStore().get(uri);
+            final List<HttpCookie> listCookie = RequestManager.getInstance().getCookieStore().get(url().toURI());
 
             if (listCookie != null && !listCookie.isEmpty())
             {
@@ -95,8 +93,7 @@ class FHttpRequest extends HttpRequest
         {
             final List<HttpCookie> listCookie = getResponseCookie();
 
-            final URI uri = url().toURI();
-            RequestManager.getInstance().getCookieStore().add(uri, listCookie);
+            RequestManager.getInstance().getCookieStore().add(url().toURI(), listCookie);
         } catch (Exception e)
         {
             HttpLogger.e("cookie saveCookieFromResponse error:" + e);
