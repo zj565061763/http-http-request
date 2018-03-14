@@ -12,7 +12,7 @@ new Thread(new Runnable()
         {
             IRequest request = new GetRequest();
             request.setUrl(URL); //设置请求地址
-            request.param("ctl", "app").param("act", "init"); //设置请求参数
+            request.getParams().put("ctl", "app").put("act", "init"); //设置请求参数
 
             IResponse response = request.execute(); //发起请求，得到Response对象
             String result = response.getBody(); //请求结果以字符串返回
@@ -34,7 +34,7 @@ new Thread(new Runnable()
 ```java
 IRequest request = new PostRequest();
 request.setUrl(URL); //设置请求地址
-request.param("ctl", "app").param("act", "init"); //设置请求参数
+request.getParams().put("ctl", "app").put("act", "init"); //设置请求参数
 request.setTag(TAG); //设置该请求的tag，可用于取消请求
 
 RequestHandler requestHandler = request.execute(new ModelRequestCallback<InitActModel>()

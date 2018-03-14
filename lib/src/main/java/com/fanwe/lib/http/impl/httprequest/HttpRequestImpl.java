@@ -20,7 +20,7 @@ abstract class HttpRequestImpl extends Request
     protected HttpRequest newHttpRequest(String url, String method)
     {
         FHttpRequest request = new FHttpRequest(url, method);
-        request.headers(getHeaders());
+        request.headers(getHeaders().toMap());
         request.readTimeout(getReadTimeout());
         request.connectTimeout(getConnectTimeout());
         request.progress(new HttpRequest.UploadProgress()
@@ -37,7 +37,7 @@ abstract class HttpRequestImpl extends Request
     @Override
     public String toString()
     {
-        String url = HttpRequest.append(getUrl(), getParams());
+        String url = HttpRequest.append(getUrl(), getParams().toMap());
         return url;
     }
 

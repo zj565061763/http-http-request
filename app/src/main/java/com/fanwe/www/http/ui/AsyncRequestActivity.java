@@ -34,7 +34,7 @@ public class AsyncRequestActivity extends AppCompatActivity
     {
         IRequest request = new PostRequest();
         request.setUrl(URL); //设置请求地址
-        request.param("ctl", "app").param("act", "init"); //设置请求参数
+        request.getParams().put("ctl", "app").put("act", "init"); //设置请求参数
         request.setTag(TAG); //设置该请求的tag，可用于取消请求
 
         request.execute(mModelRequestCallback_0);
