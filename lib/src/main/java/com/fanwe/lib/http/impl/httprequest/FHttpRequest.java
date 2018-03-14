@@ -44,18 +44,6 @@ class FHttpRequest extends HttpRequest
 
     private int mCode;
 
-    public FHttpRequest setRequestCookie(List<HttpCookie> listCookie)
-    {
-        if (listCookie != null && !listCookie.isEmpty())
-        {
-            String cookie = TextUtils.join(";", listCookie);
-            header(HEADER_COOKIE, cookie);
-
-            HttpLogger.i("cookie loadCookieFor " + url() + "\r\n" + cookie);
-        }
-        return this;
-    }
-
     public List<HttpCookie> getResponseCookie()
     {
         Map<String, List<String>> mapHeaders = headers();
@@ -86,9 +74,15 @@ class FHttpRequest extends HttpRequest
     {
         try
         {
-            URI uri = url().toURI();
-            List<HttpCookie> listRequest = RequestManager.getInstance().getCookieStore().get(uri);
-            setRequestCookie(listRequest);
+            final URI uri = url().toURI();
+            final List<HttpCookie> listCookie = RequestManager.getInstance().getCookieStore().get(uri);
+
+            if (listCookie != null && !listCookie.isEmpty())
+            {
+                final String cookie = TextUtils.join(";", listCookie);
+                header(HEADER_COOKIE, cookie);
+                HttpLogger.i("cookie loadCookieForRequest " + url() + "\r\n" + cookie);
+            }
         } catch (Exception e)
         {
             HttpLogger.e("cookie loadCookieForRequest error:" + e);
@@ -99,9 +93,10 @@ class FHttpRequest extends HttpRequest
     {
         try
         {
-            URI uri = url().toURI();
-            List<HttpCookie> listResponse = getResponseCookie();
-            RequestManager.getInstance().getCookieStore().add(uri, listResponse);
+            final List<HttpCookie> listCookie = getResponseCookie();
+
+            final URI uri = url().toURI();
+            RequestManager.getInstance().getCookieStore().add(uri, listCookie);
         } catch (Exception e)
         {
             HttpLogger.e("cookie saveCookieFromResponse error:" + e);
