@@ -43,19 +43,19 @@ class FHttpRequest extends HttpRequest
 
     private int mCode;
 
-    public List<HttpCookie> getResponseCookie()
+    private List<HttpCookie> getResponseCookie()
     {
-        Map<String, List<String>> mapHeaders = headers();
-        if (mapHeaders != null && !mapHeaders.isEmpty())
+        Map<String, List<String>> headers = headers();
+        if (headers != null && !headers.isEmpty())
         {
-            List<String> listCookie = mapHeaders.get(HEADER_SET_COOKIE);
+            List<String> listCookie = headers.get(HEADER_SET_COOKIE);
             if (listCookie == null || listCookie.isEmpty())
             {
-                listCookie = mapHeaders.get(HEADER_SET_COOKIE2);
+                listCookie = headers.get(HEADER_SET_COOKIE2);
             }
             if (listCookie != null && !listCookie.isEmpty())
             {
-                HttpLogger.i("cookie ---------->saveCookieFrom " + url() + "\r\n" + TextUtils.join("\r\n", listCookie));
+                HttpLogger.i("cookie ---------->saveCookieFromResponse " + url() + "\r\n" + TextUtils.join("\r\n", listCookie));
 
                 List<HttpCookie> listResult = new ArrayList<>();
                 for (String item : listCookie)
