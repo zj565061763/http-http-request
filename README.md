@@ -40,7 +40,7 @@ request.setTag(TAG); //设置该请求的tag，可用于取消请求
 RequestHandler requestHandler = request.execute(new ModelRequestCallback<InitActModel>()
 {
     @Override
-    public void onPrepare(Request request)
+    public void onPrepare(IRequest request)
     {
         super.onPrepare(request);
         //请求在被执行之前的准备回调(发起请求被调用的线程)
@@ -220,7 +220,7 @@ RequestManager.getInstance().setRequestIdentifierProvider(new IRequestIdentifier
 2. 在异步回调接口的onPrepare方法中取消已经发起的请求
 ```java
 @Override
-public void onPrepare(Request request)
+public void onPrepare(IRequest request)
 {
     super.onPrepare(request);
     RequestManager.getInstance().cancelRequestIdentifier(request);
