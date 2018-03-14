@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-    compile 'com.github.zj565061763:http:1.0.29'
+    compile 'com.github.zj565061763:http:1.0.30'
 }
 
 // 指定编码
