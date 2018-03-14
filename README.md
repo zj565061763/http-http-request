@@ -2,7 +2,7 @@
 本库的底层Http功能是用[http-request](https://github.com/kevinsawicki/http-request)这个库来实现的
 
 ## Gradle
-[![](https://jitpack.io/v/zj565061763/http.svg)](https://jitpack.io/#zj565061763/http)
+[![](https://jitpack.io/v/zj565061763/http-http-request.svg)](https://jitpack.io/#zj565061763/http-http-request)
 
 ## 同步请求
 ```java
