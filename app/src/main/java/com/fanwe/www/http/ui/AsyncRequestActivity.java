@@ -38,13 +38,11 @@ public class AsyncRequestActivity extends AppCompatActivity
         request.setTag(TAG); //设置该请求的tag，可用于取消请求
 
         request.execute(mModelRequestCallback_0);
-//                .execute(RequestCallbackProxy.get(mModelRequestCallback_0, mModelRequestCallback_1)); //设置请求结果回调，可以设置多个回调
+//        request.execute(RequestCallbackProxy.get(mModelRequestCallback_0, mModelRequestCallback_1)); //设置多个回调
     }
 
     private ModelRequestCallback mModelRequestCallback_0 = new ModelRequestCallback<InitActModel>()
     {
-        private long startTime;
-
         @Override
         public void onPrepare(IRequest request)
         {
@@ -56,7 +54,6 @@ public class AsyncRequestActivity extends AppCompatActivity
         public void onStart()
         {
             super.onStart();
-            startTime = System.currentTimeMillis();
             Log.i(TAG, "onStart_0");
         }
 
@@ -64,7 +61,7 @@ public class AsyncRequestActivity extends AppCompatActivity
         public void onSuccessBackground() throws Exception
         {
             super.onSuccessBackground();
-            Log.i(TAG, "onSuccessBackground_0:" + (System.currentTimeMillis() - startTime));
+            Log.i(TAG, "onSuccessBackground_0");
         }
 
         @Override
