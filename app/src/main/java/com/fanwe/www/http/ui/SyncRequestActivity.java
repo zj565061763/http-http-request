@@ -10,8 +10,6 @@ import com.fanwe.lib.http.IResponse;
 import com.fanwe.lib.http.impl.httprequest.GetRequest;
 import com.fanwe.www.http.R;
 
-import java.io.InputStream;
-
 /**
  * 同步请求demo
  */
@@ -38,13 +36,11 @@ public class SyncRequestActivity extends AppCompatActivity
                 try
                 {
                     IRequest request = new GetRequest();
-                    request.setUrl(URL);
-                    request.param("ctl", "app").param("act", "init"); //设置要提交的参数
+                    request.setUrl(URL); //设置请求地址
+                    request.param("ctl", "app").param("act", "init"); //设置请求参数
 
                     IResponse response = request.execute(); //发起请求，得到Response对象
-                    InputStream inputStream = response.getInputStream(); //结果以输入流返回
-                    int code = response.getCode(); //返回码
-                    String result = response.getBody(); //结果以字符串返回
+                    String result = response.getBody(); //请求结果以字符串返回
 
                     Log.i(TAG, result);
                 } catch (Exception e)
