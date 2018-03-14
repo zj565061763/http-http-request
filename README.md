@@ -105,8 +105,8 @@ RequestManager.getInstance().cancelTag(TAG); //根据tag取消请求
 ## 文件下载
 目前不支持断点下载，只能重头开始下载
 ```java
-Request request = new GetRequest(URL_FILE); //创建请求对象
-request.setTag(TAG); //给请求设置tag，可用于取消请求
+IRequest request = new GetRequest();
+request.setUrl(URL); //设置下载地址
 
 File file = new File(getExternalCacheDir(), "download.apk"); //设置下载文件要保存的File
 request.execute(new FileRequestCallback(file)
@@ -135,9 +135,10 @@ request.execute(new FileRequestCallback(file)
 
 ## 文件上传
 ```java
-PostRequest request = new PostRequest(URL); //创建请求对象
+IPostRequest request = new PostRequest(URL);
+request.setUrl(URL);
 request.addFile("file", file) //添加File对象
-        .param("ctl", "avatar").param("act", "uploadImage"); //添加form参数
+        .param("ctl", "avatar").param("act", "uploadImage");
 request.execute(new RequestCallback()
 {
     @Override
@@ -177,14 +178,14 @@ RequestManager.getInstance().setCookieStore(new SerializableCookieStore(this));
 RequestManager.getInstance().addRequestInterceptor(new IRequestInterceptor()
 {
     @Override
-    public void beforeExecute(Request request)
+    public void beforeExecute(IRequest request)
     {
         //请求被真正执行之前回调
         Log.i(TAG, "beforeExecute:" + request);
     }
 
     @Override
-    public void afterExecute(Request request, Response response);
+    public void afterExecute(IRequest request, IResponse response);
     {
         //请求被真正执行之后回调
     }
@@ -199,13 +200,13 @@ RequestManager.getInstance().addRequestInterceptor(new IRequestInterceptor()
 RequestManager.getInstance().setRequestIdentifierProvider(new IRequestIdentifierProvider()
 {
     @Override
-    public String provideRequestIdentifier(Request request)
+    public String provideRequestIdentifier(IRequest request)
     {
         String identifier = null;
 
         //此处的clt和act为作者公司服务端标识接口的参数，故用这两个参数组合来生成请求标识
-        Object ctl = request.getMapParam().get("ctl");
-        Object act = request.getMapParam().get("act");
+        String ctl = request.getParam("ctl");
+        String act = request.getParam("act");
         if (ctl != null && act != null)
         {
             identifier = ctl + "," + act;
@@ -228,50 +229,7 @@ public void onPrepare(Request request)
 
 ## 多个异步回调
 在实际开发中，有的接口需要很多地方都调用的时候一般把这个接口封装到一个方法中，然后要求外部传入一个异步回调对象来监听。<br>
-但是假如我们封装的方法中需要先做一些统一的处理，然后再通知外部传进来的回调对象，那怎么处理比较方便呢？<br>
-<br>
-通常的实现办法是先在内部做处理，然后再手动通知外部传进来的回调，如下：
-```java
-public static void requestCommonInterface(final RequestCallback callback)
-{
-    new PostRequest(URL).param("ctl", "app").param("act", "init").execute(new RequestCallback()
-    {
-        @Override
-        public void onSuccess()
-        {
-            //内部事先做一些统一的处理
-            Log.i(TAG, "do common logic");
-            if (callback != null)
-            {
-                callback.onSuccess();
-            }
-        }
-    });
-}
-```
-
-以上方法较为繁琐，每个要封装的地方，每个callback的回调方法都要通知，这边介绍一个库中的类可以解决这种尴尬，具体代码如下：
-```java
-public void requestCommonInterface(final RequestCallback callback)
-{
-    //公共逻辑回调
-    IRequestCallback commonLogicCallback = new RequestCallback()
-    {
-        @Override
-        public void onSuccess()
-        {
-            Log.i(TAG, "do common logic");
-        }
-    };
-
-    //根据多个回调对象动态生成一个回调代理对象，这里要注意的是，多个回调对象中的getResponse()返回的都是同一个对象
-    IRequestCallback callbackProxy = RequestCallbackProxy.get(commonLogicCallback, callback);
-
-    new PostRequest(URL).param("ctl", "app").param("act", "init").execute(callbackProxy);
-}
-```
-
-以上是为了更好的阅读代码所以一步步拆分了，你也可以像下面这么写
+但是假如我们封装的方法中需要先做一些统一的处理，然后再通知外部传进来的回调对象，可以通过以下方法较为方便的实现<br>
 ```java
 public void requestCommonInterface(final RequestCallback callback)
 {
