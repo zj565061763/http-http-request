@@ -37,7 +37,7 @@ public class DownloadActivity extends AppCompatActivity
     public void onClickRequest(View view)
     {
         File file = new File(getExternalCacheDir(), "download.apk");
-        new GetRequest().setUrl(URL_FILE).setTag(TAG).execute(new FileRequestCallback(file)
+        new GetRequest().setBaseUrl(URL_FILE).setTag(TAG).execute(new FileRequestCallback(file)
         {
             @Override
             protected void onProgressDownload(TransmitParam param)

@@ -36,7 +36,7 @@ public class SyncRequestActivity extends AppCompatActivity
                 try
                 {
                     IRequest request = new GetRequest();
-                    request.setUrl(URL); //设置请求地址
+                    request.setBaseUrl(URL); //设置请求地址
                     request.getParams().put("ctl", "app").put("act", "init"); //设置请求参数
 
                     IResponse response = request.execute(); //发起请求，得到Response对象

@@ -37,8 +37,8 @@ abstract class HttpRequestImpl extends Request
     @Override
     public String toString()
     {
-        String url = HttpRequest.append(getUrl(), getParams().toMap());
-        return url;
+        final String url = HttpRequest.append(getUrl(), getParams().toMap());
+        return url + " " + super.toString();
     }
 
     static class Response implements IResponse

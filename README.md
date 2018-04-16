@@ -14,7 +14,7 @@ new Thread(new Runnable()
         try
         {
             IRequest request = new GetRequest();
-            request.setUrl(URL); //设置请求地址
+            request.setBaseUrl(URL); //设置请求地址
             request.getParams().put("ctl", "app").put("act", "init"); //设置请求参数
 
             IResponse response = request.execute(); //发起请求，得到Response对象
@@ -36,7 +36,7 @@ new Thread(new Runnable()
 
 ```java
 IRequest request = new PostRequest();
-request.setUrl(URL); //设置请求地址
+request.setBaseUrl(URL); //设置请求地址
 request.getParams().put("ctl", "app").put("act", "init"); //设置请求参数
 request.setTag(TAG); //设置该请求的tag，可用于取消请求
 
@@ -109,7 +109,7 @@ RequestManager.getInstance().cancelTag(TAG); //根据tag取消请求
 目前不支持断点下载，只能重头开始下载
 ```java
 IRequest request = new GetRequest();
-request.setUrl(URL); //设置下载地址
+request.setBaseUrl(URL); //设置下载地址
 
 File file = new File(getExternalCacheDir(), "download.apk"); //设置下载文件要保存的File
 request.execute(new FileRequestCallback(file)
@@ -139,7 +139,7 @@ request.execute(new FileRequestCallback(file)
 ## 文件上传
 ```java
 IPostRequest request = new PostRequest(URL);
-request.setUrl(URL);
+request.setBaseUrl(URL);
 request.addFile("file", file) //添加File对象
         .param("ctl", "avatar").param("act", "uploadImage");
 request.execute(new RequestCallback()
