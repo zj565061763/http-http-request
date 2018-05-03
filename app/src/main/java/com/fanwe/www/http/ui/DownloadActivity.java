@@ -19,7 +19,7 @@ public class DownloadActivity extends AppCompatActivity
 {
     public static final String TAG = "DownloadActivity";
 
-    public static final String URL_FILE = "http://110.81.153.150/mmgr.myapp.com/msoft/sec/secure/GodDresser/1/2/3/102027/tencentmobilemanager_20170911185709_7.3.0_android_build4155_102027.apk?mkey=59db0a2773ba1ece&f=d273&c=0&p=.apk";
+    public static final String URL_FILE = "http://sw.bos.baidu.com/sw-search-sp/software/775ada201a2da/QQ_9.0.2.23490_setup.exe";
 
     private ProgressBar mProgressBar;
     private TextView mTvProgress, mTvSpeed;
@@ -29,9 +29,9 @@ public class DownloadActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_download);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mTvProgress = (TextView) findViewById(R.id.tv_progress);
-        mTvSpeed = (TextView) findViewById(R.id.tv_speed);
+        mProgressBar = findViewById(R.id.progressBar);
+        mTvProgress = findViewById(R.id.tv_progress);
+        mTvSpeed = findViewById(R.id.tv_speed);
     }
 
     public void onClickRequest(View view)
