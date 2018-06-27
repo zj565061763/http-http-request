@@ -9,7 +9,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 20180627
-        versionName "1.0.6"
+        versionName "1.0.7"
     }
 
     buildTypes {
@@ -26,7 +26,7 @@ android {
 }
 
 dependencies {
-    api 'com.github.zj565061763:http:1.0.39'
+    api 'com.github.zj565061763:http:1.0.40'
 }
 
 // 指定编码
