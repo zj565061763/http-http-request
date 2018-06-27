@@ -19,7 +19,7 @@ import com.google.gson.Gson;
  */
 public class AsyncRequestActivity extends AppCompatActivity
 {
-    public static final String TAG = "AsyncRequestActivity";
+    public static final String TAG = AsyncRequestActivity.class.getSimpleName();
 
     public static final String URL = "http://ilvbt3.fanwe.net/mapi/index.php";
 

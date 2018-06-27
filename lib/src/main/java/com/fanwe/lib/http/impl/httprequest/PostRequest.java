@@ -19,9 +19,7 @@ public class PostRequest extends HttpRequestImpl implements IPostRequest
     private List<FileRequestBody> getListFile()
     {
         if (mListFile == null)
-        {
             mListFile = new ArrayList<>();
-        }
         return mListFile;
     }
 
@@ -35,12 +33,9 @@ public class PostRequest extends HttpRequestImpl implements IPostRequest
     @Override
     public PostRequest addFile(String name, String filename, String contentType, File file)
     {
-        FileRequestBody body = new FileRequestBody();
+        final FileRequestBody body = new FileRequestBody(file);
         body.setName(name);
-        body.setFilename(filename);
         body.setContentType(contentType);
-        body.setFile(file);
-
         getListFile().add(body);
         return this;
     }
@@ -48,7 +43,7 @@ public class PostRequest extends HttpRequestImpl implements IPostRequest
     @Override
     protected IResponse doExecute() throws Exception
     {
-        HttpRequest request = newHttpRequest(getUrl(), HttpRequest.METHOD_POST);
+        final HttpRequest request = newHttpRequest(getUrl(), HttpRequest.METHOD_POST);
         final Map<String, Object> params = getParams().toMap();
 
         if (mListFile != null && !mListFile.isEmpty())

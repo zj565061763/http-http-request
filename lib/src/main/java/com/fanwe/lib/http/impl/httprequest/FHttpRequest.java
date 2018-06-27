@@ -33,40 +33,29 @@ class FHttpRequest extends HttpRequest
      */
     public static final String HEADER_SET_COOKIE = "Set-Cookie";
     /**
-     * 'Set-Cookie2' header name
-     */
-    public static final String HEADER_SET_COOKIE2 = "Set-Cookie2";
-    /**
      * 'Cookie' header name
      */
     public static final String HEADER_COOKIE = "Cookie";
 
-    private int mCode;
+    private int mCode = Integer.MAX_VALUE;
 
     private List<HttpCookie> getResponseCookie()
     {
-        Map<String, List<String>> headers = headers();
-        if (headers != null && !headers.isEmpty())
+        final Map<String, List<String>> headers = headers();
+        if (headers == null || headers.isEmpty())
+            return null;
+
+        final List<String> listCookie = headers.get(HEADER_SET_COOKIE);
+        if (listCookie == null || listCookie.isEmpty())
+            return null;
+
+        HttpLogger.i("cookie ---------->saveCookieFromResponse " + url() + "\r\n" + TextUtils.join("\r\n", listCookie));
+        final List<HttpCookie> listResult = new ArrayList<>();
+        for (String item : listCookie)
         {
-            List<String> listCookie = headers.get(HEADER_SET_COOKIE);
-            if (listCookie == null || listCookie.isEmpty())
-            {
-                listCookie = headers.get(HEADER_SET_COOKIE2);
-            }
-            if (listCookie != null && !listCookie.isEmpty())
-            {
-                HttpLogger.i("cookie ---------->saveCookieFromResponse " + url() + "\r\n" + TextUtils.join("\r\n", listCookie));
-
-                List<HttpCookie> listResult = new ArrayList<>();
-                for (String item : listCookie)
-                {
-                    listResult.addAll(HttpCookie.parse(item));
-                }
-                return listResult;
-            }
+            listResult.addAll(HttpCookie.parse(item));
         }
-
-        return null;
+        return listResult;
     }
 
     private void loadCookieForRequest()
@@ -107,7 +96,7 @@ class FHttpRequest extends HttpRequest
     {
         final int code = super.code();
 
-        if (mCode != code)
+        if (mCode == Integer.MAX_VALUE)
         {
             mCode = code;
             saveCookieFromResponse();

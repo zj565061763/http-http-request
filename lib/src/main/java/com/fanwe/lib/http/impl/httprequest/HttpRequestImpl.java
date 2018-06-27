@@ -19,7 +19,7 @@ abstract class HttpRequestImpl extends Request
 {
     protected HttpRequest newHttpRequest(String url, String method)
     {
-        FHttpRequest request = new FHttpRequest(url, method);
+        final FHttpRequest request = new FHttpRequest(url, method);
         request.headers(getHeaders().toMap());
         request.readTimeout(getReadTimeout());
         request.connectTimeout(getConnectTimeout());
@@ -53,22 +53,6 @@ abstract class HttpRequestImpl extends Request
         }
 
         @Override
-        public synchronized String getBody() throws IOException
-        {
-            if (TextUtils.isEmpty(mBody))
-            {
-                try
-                {
-                    mBody = HttpIOUtil.readString(getInputStream(), getCharset());
-                } finally
-                {
-                    HttpIOUtil.closeQuietly(getInputStream());
-                }
-            }
-            return mBody;
-        }
-
-        @Override
         public int getCode()
         {
             return mHttpRequest.code();
@@ -96,6 +80,22 @@ abstract class HttpRequestImpl extends Request
         public InputStream getInputStream()
         {
             return mHttpRequest.stream();
+        }
+
+        @Override
+        public synchronized String getAsString() throws IOException
+        {
+            if (TextUtils.isEmpty(mBody))
+            {
+                try
+                {
+                    mBody = HttpIOUtil.readString(getInputStream(), getCharset());
+                } finally
+                {
+                    HttpIOUtil.closeQuietly(getInputStream());
+                }
+            }
+            return mBody;
         }
     }
 }

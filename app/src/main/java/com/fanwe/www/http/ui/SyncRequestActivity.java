@@ -40,7 +40,7 @@ public class SyncRequestActivity extends AppCompatActivity
                     request.getParams().put("ctl", "app").put("act", "init"); //设置请求参数
 
                     IResponse response = request.execute(); //发起请求，得到Response对象
-                    String result = response.getBody(); //请求结果以字符串返回
+                    String result = response.getAsString(); //请求结果以字符串返回
 
                     Log.i(TAG, result);
                 } catch (Exception e)

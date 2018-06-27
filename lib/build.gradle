@@ -4,13 +4,12 @@ apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.zj565061763'
 
 android {
-    compileSdkVersion 26
-
+    compileSdkVersion 27
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 20180503
-        versionName "1.0.5"
+        versionCode 20180627
+        versionName "1.0.6"
     }
 
     buildTypes {
@@ -20,10 +19,14 @@ android {
         }
     }
 
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 dependencies {
-    api 'com.github.zj565061763:http:1.0.38'
+    api 'com.github.zj565061763:http:a4d11d43fa'
 }
 
 // 指定编码
