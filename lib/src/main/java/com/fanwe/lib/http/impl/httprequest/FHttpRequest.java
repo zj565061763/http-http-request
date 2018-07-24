@@ -3,7 +3,7 @@ package com.fanwe.lib.http.impl.httprequest;
 import android.text.TextUtils;
 
 import com.fanwe.lib.http.RequestManager;
-import com.fanwe.lib.http.utils.HttpLogger;
+import com.fanwe.lib.http.utils.HttpLog;
 
 import java.net.HttpCookie;
 import java.net.URL;
@@ -49,7 +49,7 @@ class FHttpRequest extends HttpRequest
         if (listCookie == null || listCookie.isEmpty())
             return null;
 
-        HttpLogger.i("cookie ---------->saveCookieFromResponse " + url() + "\r\n" + TextUtils.join("\r\n", listCookie));
+        HttpLog.i("cookie ---------->saveCookieFromResponse " + url() + "\r\n" + TextUtils.join("\r\n", listCookie));
         final List<HttpCookie> listResult = new ArrayList<>();
         for (String item : listCookie)
         {
@@ -68,11 +68,11 @@ class FHttpRequest extends HttpRequest
             {
                 final String cookie = TextUtils.join(";", listCookie);
                 header(HEADER_COOKIE, cookie);
-                HttpLogger.i("cookie loadCookieForRequest " + url() + "\r\n" + cookie);
+                HttpLog.i("cookie loadCookieForRequest " + url() + "\r\n" + cookie);
             }
         } catch (Exception e)
         {
-            HttpLogger.e("cookie loadCookieForRequest error:" + e);
+            HttpLog.e("cookie loadCookieForRequest error:" + e);
         }
     }
 
@@ -85,7 +85,7 @@ class FHttpRequest extends HttpRequest
             RequestManager.getInstance().getCookieStore().add(url().toURI(), listCookie);
         } catch (Exception e)
         {
-            HttpLogger.e("cookie saveCookieFromResponse error:" + e);
+            HttpLog.e("cookie saveCookieFromResponse error:" + e);
         }
     }
 
