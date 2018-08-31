@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.fanwe.lib.http.RequestManager;
-import com.fanwe.lib.http.cookie.SerializableCookieStore;
 import com.fanwe.www.http.AppRequestInterceptor;
 import com.fanwe.www.http.R;
+import com.sd.lib.http.RequestManager;
+import com.sd.lib.http.cookie.SerializableCookieStore;
 
 public class MainActivity extends AppCompatActivity
 {

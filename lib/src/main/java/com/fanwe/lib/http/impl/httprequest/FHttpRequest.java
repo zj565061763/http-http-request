@@ -2,8 +2,8 @@ package com.fanwe.lib.http.impl.httprequest;
 
 import android.text.TextUtils;
 
-import com.fanwe.lib.http.RequestManager;
-import com.fanwe.lib.http.utils.HttpLog;
+import com.sd.lib.http.RequestManager;
+import com.sd.lib.http.utils.HttpLog;
 
 import java.net.HttpCookie;
 import java.net.URL;

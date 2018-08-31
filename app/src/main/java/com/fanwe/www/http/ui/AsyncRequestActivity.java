@@ -5,14 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-import com.fanwe.lib.http.IRequest;
-import com.fanwe.lib.http.IResponse;
-import com.fanwe.lib.http.RequestManager;
-import com.fanwe.lib.http.callback.ModelRequestCallback;
 import com.fanwe.lib.http.impl.httprequest.PostRequest;
 import com.fanwe.www.http.R;
 import com.fanwe.www.http.model.InitActModel;
 import com.google.gson.Gson;
+import com.sd.lib.http.IRequest;
+import com.sd.lib.http.IResponse;
+import com.sd.lib.http.RequestManager;
+import com.sd.lib.http.callback.ModelRequestCallback;
 
 /**
  * 异步请求demo

@@ -1,17 +1,14 @@
 package com.fanwe.lib.http.impl.httprequest;
 
-import com.fanwe.lib.http.IPostRequest;
-import com.fanwe.lib.http.IResponse;
-import com.fanwe.lib.http.body.FileRequestBody;
+import com.sd.lib.http.IPostRequest;
+import com.sd.lib.http.IResponse;
+import com.sd.lib.http.body.FileRequestBody;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by zhengjun on 2017/10/11.
- */
 public class PostRequest extends HttpRequestImpl implements IPostRequest
 {
     private List<FileRequestBody> mListFile;

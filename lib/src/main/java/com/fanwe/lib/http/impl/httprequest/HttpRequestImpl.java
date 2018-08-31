@@ -2,18 +2,14 @@ package com.fanwe.lib.http.impl.httprequest;
 
 import android.text.TextUtils;
 
-import com.fanwe.lib.http.IResponse;
-import com.fanwe.lib.http.Request;
-import com.fanwe.lib.http.utils.HttpIOUtil;
+import com.sd.lib.http.IResponse;
+import com.sd.lib.http.Request;
+import com.sd.lib.http.utils.HttpIOUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
-
-/**
- * Created by zhengjun on 2017/10/11.
- */
 
 abstract class HttpRequestImpl extends Request
 {

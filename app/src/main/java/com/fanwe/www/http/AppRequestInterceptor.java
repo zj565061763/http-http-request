@@ -2,9 +2,9 @@ package com.fanwe.www.http;
 
 import android.util.Log;
 
-import com.fanwe.lib.http.IRequest;
-import com.fanwe.lib.http.IResponse;
-import com.fanwe.lib.http.interceptor.IRequestInterceptor;
+import com.sd.lib.http.IRequest;
+import com.sd.lib.http.IResponse;
+import com.sd.lib.http.interceptor.IRequestInterceptor;
 
 import java.util.Map;
 import java.util.WeakHashMap;

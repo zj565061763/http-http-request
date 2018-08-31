@@ -5,10 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-import com.fanwe.lib.http.IRequest;
-import com.fanwe.lib.http.IResponse;
 import com.fanwe.lib.http.impl.httprequest.GetRequest;
 import com.fanwe.www.http.R;
+import com.sd.lib.http.IRequest;
+import com.sd.lib.http.IResponse;
 
 /**
  * 同步请求demo

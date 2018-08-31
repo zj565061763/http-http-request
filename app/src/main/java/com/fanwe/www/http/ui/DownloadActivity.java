@@ -7,11 +7,11 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.fanwe.lib.http.RequestManager;
-import com.fanwe.lib.http.callback.FileRequestCallback;
 import com.fanwe.lib.http.impl.httprequest.GetRequest;
-import com.fanwe.lib.http.utils.TransmitParam;
 import com.fanwe.www.http.R;
+import com.sd.lib.http.RequestManager;
+import com.sd.lib.http.callback.FileRequestCallback;
+import com.sd.lib.http.utils.TransmitParam;
 
 import java.io.File;
 
