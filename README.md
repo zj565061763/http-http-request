@@ -14,13 +14,21 @@ new Thread(new Runnable()
         try
         {
             IRequest request = new GetRequest();
-            request.setBaseUrl(URL); //设置请求地址
-            request.getParams().put("ctl", "app").put("act", "init"); //设置请求参数
+            //设置请求地址
+            request.setBaseUrl("https://www.baidu.com/");
+            //发起请求，得到Response对象
+            IResponse response = request.execute();
+            //请求结果以字符串返回
+            final String result = response.getAsString();
 
-            IResponse response = request.execute(); //发起请求，得到Response对象
-            String result = response.getAsString(); //请求结果以字符串返回
-
-            Log.i(TAG, result);
+            runOnUiThread(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    mTextView.setText(result);
+                }
+            });
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -153,8 +161,9 @@ request.execute(new FileRequestCallback(file)
 ```java
 IPostRequest request = new PostRequest(URL);
 request.setBaseUrl(URL);
-request.addFile("file", file) //添加File对象
-        .param("ctl", "avatar").param("act", "uploadImage");
+// 添加File对象
+request.addFile("file", file)
+        .param("aaa", "aaa").param("bbb", "bbb");
 request.execute(new RequestCallback()
 {
     @Override
@@ -220,12 +229,11 @@ RequestManager.getInstance().setRequestIdentifierProvider(new IRequestIdentifier
     {
         String identifier = null;
 
-        //此处的clt和act为作者公司服务端标识接口的参数，故用这两个参数组合来生成请求标识
-        Object ctl = request.getParam("ctl");
+        //此处的act为作者公司服务端标识接口的参数，故用这个参数组合来生成请求标识
         Object act = request.getParam("act");
-        if (ctl != null && act != null)
+        if (act != null)
         {
-            identifier = ctl + "," + act;
+            identifier = String.valueOf(act);
         }
 
         return identifier;
