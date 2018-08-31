@@ -1,4 +1,4 @@
-package com.fanwe.lib.http.impl.httprequest;
+package com.sd.lib.http.impl.httprequest;
 
 import com.sd.lib.http.IGetRequest;
 import com.sd.lib.http.IResponse;

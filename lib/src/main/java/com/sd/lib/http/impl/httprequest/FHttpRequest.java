@@ -1,4 +1,4 @@
-package com.fanwe.lib.http.impl.httprequest;
+package com.sd.lib.http.impl.httprequest;
 
 import android.text.TextUtils;
 
@@ -11,9 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by zhengjun on 2017/10/10.
- */
 class FHttpRequest extends HttpRequest
 {
     public FHttpRequest(CharSequence url, String method) throws HttpRequestException

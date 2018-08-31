@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.fanwe.www.http"
+<manifest package="com.sd.www.http"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name=".App"
+        android:name="com.sd.www.http.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity">
+        <activity android:name="com.sd.www.http.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -21,9 +21,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.DownloadActivity"/>
-        <activity android:name=".ui.AsyncRequestActivity"/>
-        <activity android:name=".ui.SyncRequestActivity"/>
+        <activity android:name="com.sd.www.http.ui.DownloadActivity"/>
+        <activity android:name="com.sd.www.http.ui.AsyncRequestActivity"/>
+        <activity android:name="com.sd.www.http.ui.SyncRequestActivity"/>
 
     </application>
 

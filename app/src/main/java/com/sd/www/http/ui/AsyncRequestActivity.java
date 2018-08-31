@@ -1,13 +1,13 @@
-package com.fanwe.www.http.ui;
+package com.sd.www.http.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-import com.fanwe.lib.http.impl.httprequest.PostRequest;
-import com.fanwe.www.http.R;
-import com.fanwe.www.http.model.InitActModel;
+import com.sd.lib.http.impl.httprequest.PostRequest;
+import com.sd.www.http.R;
+import com.sd.www.http.model.InitActModel;
 import com.google.gson.Gson;
 import com.sd.lib.http.IRequest;
 import com.sd.lib.http.IResponse;

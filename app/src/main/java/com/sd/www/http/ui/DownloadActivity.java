@@ -1,4 +1,4 @@
-package com.fanwe.www.http.ui;
+package com.sd.www.http.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.fanwe.lib.http.impl.httprequest.GetRequest;
-import com.fanwe.www.http.R;
+import com.sd.lib.http.impl.httprequest.GetRequest;
+import com.sd.www.http.R;
 import com.sd.lib.http.RequestManager;
 import com.sd.lib.http.callback.FileRequestCallback;
 import com.sd.lib.http.utils.TransmitParam;

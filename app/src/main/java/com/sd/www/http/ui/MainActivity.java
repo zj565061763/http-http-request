@@ -1,12 +1,12 @@
-package com.fanwe.www.http.ui;
+package com.sd.www.http.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.fanwe.www.http.AppRequestInterceptor;
-import com.fanwe.www.http.R;
+import com.sd.www.http.AppRequestInterceptor;
+import com.sd.www.http.R;
 import com.sd.lib.http.RequestManager;
 import com.sd.lib.http.cookie.SerializableCookieStore;
 

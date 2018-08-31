@@ -1,12 +1,12 @@
-package com.fanwe.www.http.ui;
+package com.sd.www.http.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.fanwe.lib.http.impl.httprequest.GetRequest;
-import com.fanwe.www.http.R;
+import com.sd.lib.http.impl.httprequest.GetRequest;
+import com.sd.www.http.R;
 import com.sd.lib.http.IRequest;
 import com.sd.lib.http.IResponse;
 

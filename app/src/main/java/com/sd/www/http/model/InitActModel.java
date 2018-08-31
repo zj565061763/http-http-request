@@ -1,4 +1,4 @@
-package com.fanwe.www.http.model;
+package com.sd.www.http.model;
 
 import java.util.ArrayList;
 import java.util.List;

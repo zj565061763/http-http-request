@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.fanwe.lib.http.impl.httprequest" />
+<manifest package="com.sd.lib.http.impl.httprequest" />
