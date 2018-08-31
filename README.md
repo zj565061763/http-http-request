@@ -37,10 +37,10 @@ new Thread(new Runnable()
 ```java
 IRequest request = new PostRequest();
 request.setBaseUrl(URL); //设置请求地址
-request.getParams().put("ctl", "app").put("act", "init"); //设置请求参数
+request.getParams().put("aaa", "aaa").put("bbb", "bbb"); //设置请求参数
 request.setTag(TAG); //设置该请求的tag，可用于取消请求
 
-RequestHandler requestHandler = request.execute(new ModelRequestCallback<InitActModel>()
+RequestHandler requestHandler = request.execute(new ModelRequestCallback<WeatherModel>()
 {
     @Override
     public void onPrepare(IRequest request)
@@ -68,12 +68,12 @@ RequestHandler requestHandler = request.execute(new ModelRequestCallback<InitAct
     {
         //成功回调(UI线程)
         IResponse response = getResponse(); //获得返回结果对象
-        InitActModel model = getActModel(); // 获得接口对应的实体
-        Log.i(TAG, "onSuccess:" + model.getCity());
+        WeatherModel model = getActModel(); // 获得接口对应的实体
+        Log.i(TAG, "onSuccess:" + model.weatherinfo.city);
     }
 
     @Override
-    protected InitActModel parseToModel(String content, Class<InitActModel> clazz)
+    protected WeatherModel parseToModel(String content, Class<WeatherModel> clazz)
     {
         //把返回的内容转实体(非UI线程)
         return new Gson().fromJson(content, clazz);
