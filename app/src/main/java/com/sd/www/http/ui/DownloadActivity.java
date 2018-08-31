@@ -18,8 +18,7 @@ import java.io.File;
 public class DownloadActivity extends AppCompatActivity
 {
     public static final String TAG = DownloadActivity.class.getSimpleName();
-
-    public static final String URL_FILE = "http://sw.bos.baidu.com/sw-search-sp/software/775ada201a2da/QQ_9.0.2.23490_setup.exe";
+    public static final String URL_FILE = "https://qd.myapp.com/myapp/qqteam/AndroidQQ/mobileqq_android.apk";
 
     private ProgressBar mProgressBar;
     private TextView mTvProgress, mTvSpeed;
