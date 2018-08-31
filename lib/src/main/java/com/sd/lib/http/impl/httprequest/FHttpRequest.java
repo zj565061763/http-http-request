@@ -6,6 +6,7 @@ import com.sd.lib.http.RequestManager;
 import com.sd.lib.http.utils.HttpLog;
 
 import java.net.HttpCookie;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +60,8 @@ class FHttpRequest extends HttpRequest
     {
         try
         {
-            final List<HttpCookie> listCookie = RequestManager.getInstance().getCookieStore().get(url().toURI());
+            final URI uri = url().toURI();
+            final List<HttpCookie> listCookie = RequestManager.getInstance().getCookieStore().get(uri);
 
             if (listCookie != null && !listCookie.isEmpty())
             {
@@ -77,9 +79,10 @@ class FHttpRequest extends HttpRequest
     {
         try
         {
+            final URI uri = url().toURI();
             final List<HttpCookie> listCookie = getResponseCookie();
 
-            RequestManager.getInstance().getCookieStore().add(url().toURI(), listCookie);
+            RequestManager.getInstance().getCookieStore().add(uri, listCookie);
         } catch (Exception e)
         {
             HttpLog.e("cookie saveCookieFromResponse error:" + e);
