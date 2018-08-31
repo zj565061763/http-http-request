@@ -2,8 +2,8 @@ package com.fanwe.www.http.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.fanwe.lib.http.impl.httprequest.GetRequest;
 import com.fanwe.www.http.R;
@@ -15,15 +15,14 @@ import com.sd.lib.http.IResponse;
  */
 public class SyncRequestActivity extends AppCompatActivity
 {
-    public static final String TAG = "SyncRequestActivity";
-
-    public static final String URL = "http://ilvbt3.fanwe.net/mapi/index.php";
+    private TextView mTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sync_request);
+        mTextView = findViewById(R.id.tv_result);
     }
 
     public void onClickRequest(View view)
@@ -36,13 +35,21 @@ public class SyncRequestActivity extends AppCompatActivity
                 try
                 {
                     IRequest request = new GetRequest();
-                    request.setBaseUrl(URL); //设置请求地址
-                    request.getParams().put("ctl", "app").put("act", "init"); //设置请求参数
+                    //设置请求地址
+                    request.setBaseUrl("https://www.baidu.com/");
+                    //发起请求，得到Response对象
+                    IResponse response = request.execute();
+                    //请求结果以字符串返回
+                    final String result = response.getAsString();
 
-                    IResponse response = request.execute(); //发起请求，得到Response对象
-                    String result = response.getAsString(); //请求结果以字符串返回
-
-                    Log.i(TAG, result);
+                    runOnUiThread(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            mTextView.setText(result);
+                        }
+                    });
                 } catch (Exception e)
                 {
                     e.printStackTrace();
@@ -50,5 +57,4 @@ public class SyncRequestActivity extends AppCompatActivity
             }
         }).start();
     }
-
 }
