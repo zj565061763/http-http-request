@@ -7,17 +7,17 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.sd.lib.http.impl.httprequest.GetRequest;
-import com.sd.www.http.R;
 import com.sd.lib.http.RequestManager;
 import com.sd.lib.http.callback.FileRequestCallback;
+import com.sd.lib.http.impl.httprequest.GetRequest;
 import com.sd.lib.http.utils.TransmitParam;
+import com.sd.www.http.R;
 
 import java.io.File;
 
 public class DownloadActivity extends AppCompatActivity
 {
-    public static final String TAG = "DownloadActivity";
+    public static final String TAG = DownloadActivity.class.getSimpleName();
 
     public static final String URL_FILE = "http://sw.bos.baidu.com/sw-search-sp/software/775ada201a2da/QQ_9.0.2.23490_setup.exe";
 
