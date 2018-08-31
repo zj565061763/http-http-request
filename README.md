@@ -159,7 +159,7 @@ request.execute(new FileRequestCallback(file)
 
 ## 文件上传
 ```java
-IPostRequest request = new PostRequest(URL);
+IPostRequest request = new PostRequest();
 request.setBaseUrl(URL);
 // 添加File对象
 request.addFile("file", file)
@@ -257,7 +257,10 @@ public void onPrepare(IRequest request)
 ```java
 public void requestCommonInterface(final RequestCallback callback)
 {
-    new PostRequest(URL).param("ctl", "app").param("act", "init").execute(RequestCallbackProxy.get(new RequestCallback()
+    IPostRequest request = new PostRequest();
+    request.setBaseUrl(URL);
+    request.getParams().put("aaa", "aaa");
+    request.execute(RequestCallbackProxy.get(new RequestCallback()
     {
         @Override
         public void onSuccess()
