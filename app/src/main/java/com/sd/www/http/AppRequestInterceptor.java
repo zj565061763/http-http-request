@@ -28,10 +28,11 @@ public class AppRequestInterceptor implements IRequestInterceptor
     }
 
     @Override
-    public void afterExecute(IRequest request, IResponse response)
+    public IResponse afterExecute(IRequest request, IResponse response)
     {
         //请求发起之后回调
         long time = System.currentTimeMillis() - mMapTime.get(request);
         Log.i(TAG, "afterExecute:" + request + " " + time);
+        return null;
     }
 }
