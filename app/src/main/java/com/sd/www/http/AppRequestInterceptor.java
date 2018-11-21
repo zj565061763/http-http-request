@@ -19,11 +19,12 @@ public class AppRequestInterceptor implements IRequestInterceptor
     private final Map<IRequest, Long> mMapTime = new WeakHashMap<>();
 
     @Override
-    public void beforeExecute(IRequest request)
+    public IResponse beforeExecute(IRequest request)
     {
         //请求发起之前回调
         mMapTime.put(request, System.currentTimeMillis());
         Log.i(TAG, "beforeExecute:" + request);
+        return null;
     }
 
     @Override
