@@ -50,6 +50,7 @@ public class PostRequest extends HttpRequestImpl implements IPostRequest
 
         if (mBody != null)
         {
+            request.contentType(mBody.getContentType());
             if (mBody instanceof StringBody)
             {
                 final String body = ((StringBody) mBody).getBody();
