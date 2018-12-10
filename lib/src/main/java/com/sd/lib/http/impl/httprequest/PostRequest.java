@@ -1,19 +1,27 @@
 package com.sd.lib.http.impl.httprequest;
 
+import android.text.TextUtils;
+
+import com.sd.lib.http.ContentType;
 import com.sd.lib.http.IPostRequest;
 import com.sd.lib.http.IResponse;
-import com.sd.lib.http.body.FileRequestBody;
+import com.sd.lib.http.body.BytesBody;
+import com.sd.lib.http.body.FileBody;
+import com.sd.lib.http.body.IRequestBody;
+import com.sd.lib.http.body.StringBody;
 
 import java.io.File;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class PostRequest extends HttpRequestImpl implements IPostRequest
 {
-    private List<FileRequestBody> mListFile;
+    private List<FilePart> mListFile;
+    private IRequestBody mBody;
 
-    private List<FileRequestBody> getListFile()
+    private List<FilePart> getListFile()
     {
         if (mListFile == null)
             mListFile = new ArrayList<>();
@@ -21,19 +29,17 @@ public class PostRequest extends HttpRequestImpl implements IPostRequest
     }
 
     @Override
-    public PostRequest addFile(String name, File file)
+    public PostRequest addPart(String name, File file)
     {
-        addFile(name, null, null, file);
+        addPart(name, null, null, file);
         return this;
     }
 
     @Override
-    public PostRequest addFile(String name, String filename, String contentType, File file)
+    public PostRequest addPart(String name, String filename, String contentType, File file)
     {
-        final FileRequestBody body = new FileRequestBody(file);
-        body.setName(name);
-        body.setContentType(contentType);
-        getListFile().add(body);
+        final FilePart filePart = new FilePart(name, filename, contentType, file);
+        getListFile().add(filePart);
         return this;
     }
 
@@ -41,24 +47,73 @@ public class PostRequest extends HttpRequestImpl implements IPostRequest
     protected IResponse doExecute() throws Exception
     {
         final HttpRequest request = newHttpRequest(getUrl(), HttpRequest.METHOD_POST);
-        final Map<String, Object> params = getParams().toMap();
 
-        if (mListFile != null && !mListFile.isEmpty())
+        if (mBody != null)
         {
-            for (Map.Entry<String, Object> item : params.entrySet())
+            if (mBody instanceof StringBody)
             {
-                request.part(item.getKey(), String.valueOf(item.getValue()));
-            }
-
-            for (FileRequestBody item : mListFile)
+                final String body = ((StringBody) mBody).getBody();
+                request.send(body);
+            } else if (mBody instanceof FileBody)
             {
-                request.part(item.getName(), item.getFilename(), item.getContentType(), item.getFile());
+                final File body = ((FileBody) mBody).getBody();
+                request.send(body);
+            } else if (mBody instanceof BytesBody)
+            {
+                final byte[] body = ((BytesBody) mBody).getBody();
+                request.send(body);
             }
         } else
         {
-            request.form(params);
+            final Map<String, Object> params = getParams().toMap();
+            if (mListFile != null && !mListFile.isEmpty())
+            {
+                for (Map.Entry<String, Object> item : params.entrySet())
+                {
+                    request.part(item.getKey(), String.valueOf(item.getValue()));
+                }
+
+                for (FilePart item : mListFile)
+                {
+                    request.part(item.name, item.filename, item.contentType, item.file);
+                }
+
+            } else
+            {
+                request.form(params);
+            }
         }
 
         return new Response(request);
+    }
+
+    @Override
+    public PostRequest setBody(IRequestBody body)
+    {
+        mBody = body;
+        return this;
+    }
+
+    private static final class FilePart
+    {
+        public final String name;
+        public final String filename;
+        public final String contentType;
+        public final File file;
+
+        public FilePart(String name, String filename, String contentType, File file)
+        {
+            if (TextUtils.isEmpty(contentType))
+            {
+                contentType = HttpURLConnection.guessContentTypeFromName(file.getName());
+                if (TextUtils.isEmpty(contentType))
+                    contentType = ContentType.STREAM;
+            }
+
+            this.name = name;
+            this.filename = filename;
+            this.contentType = contentType;
+            this.file = file;
+        }
     }
 }
