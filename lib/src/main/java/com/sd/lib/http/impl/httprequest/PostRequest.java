@@ -111,6 +111,9 @@ public class PostRequest extends HttpRequestImpl implements IPostRequest
                     contentType = ContentType.STREAM;
             }
 
+            if (TextUtils.isEmpty(filename))
+                filename = file.getName();
+
             this.name = name;
             this.filename = filename;
             this.contentType = contentType;
