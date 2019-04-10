@@ -3,7 +3,7 @@ package com.sd.lib.http.impl.httprequest;
 import com.sd.lib.http.IGetRequest;
 import com.sd.lib.http.IResponse;
 
-public class GetRequest extends HttpRequestImpl implements IGetRequest
+public class GetRequest extends BaseRequest implements IGetRequest
 {
     @Override
     protected IResponse doExecute() throws Exception
