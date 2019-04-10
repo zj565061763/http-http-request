@@ -76,7 +76,7 @@ public abstract class BaseRequest extends Request
         return url + " " + super.toString();
     }
 
-    static class Response implements IResponse
+    public static class Response implements IResponse
     {
         private HttpRequest mHttpRequest;
         private String mBody;
