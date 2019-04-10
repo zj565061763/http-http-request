@@ -9,7 +9,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 20190410
-        versionName "1.1.9"
+        versionName "1.1.10"
     }
 
     buildTypes {
