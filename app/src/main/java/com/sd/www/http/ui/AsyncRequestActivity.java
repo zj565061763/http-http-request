@@ -15,6 +15,8 @@ import com.sd.lib.http.impl.httprequest.GetRequest;
 import com.sd.www.http.R;
 import com.sd.www.http.model.WeatherModel;
 
+import java.lang.reflect.Type;
+
 /**
  * 异步请求demo
  */
@@ -68,10 +70,10 @@ public class AsyncRequestActivity extends AppCompatActivity
             }
 
             @Override
-            protected WeatherModel parseToModel(String content, Class<WeatherModel> clazz)
+            protected WeatherModel parseToModel(String content, Type type)
             {
                 // 把返回的内容转实体(非UI线程)
-                return new Gson().fromJson(content, clazz);
+                return new Gson().fromJson(content, type);
             }
 
             @Override

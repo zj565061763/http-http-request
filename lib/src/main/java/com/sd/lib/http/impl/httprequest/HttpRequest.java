@@ -95,7 +95,7 @@ import javax.net.ssl.X509TrustManager;
  * Each instance supports making a single request and cannot be reused for
  * further requests.
  */
-class HttpRequest {
+public class HttpRequest {
 
   /**
    * 'UTF-8' charset name
