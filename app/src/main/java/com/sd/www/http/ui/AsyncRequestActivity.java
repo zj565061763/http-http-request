@@ -43,7 +43,7 @@ public class AsyncRequestActivity extends AppCompatActivity
         request.setTag(TAG);
 
         // 发起异步请求
-        RequestHandler requestHandler = request.execute(new ModelRequestCallback<WeatherModel>()
+        final RequestHandler requestHandler = request.execute(new ModelRequestCallback<WeatherModel>()
         {
             @Override
             public void onPrepare(IRequest request)
