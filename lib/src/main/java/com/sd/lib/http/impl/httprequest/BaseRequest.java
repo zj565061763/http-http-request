@@ -19,7 +19,7 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSocketFactory;
 
-abstract class HttpRequestImpl extends Request
+public abstract class BaseRequest extends Request
 {
     private static SSLSocketFactory TRUSTED_FACTORY;
 
@@ -60,7 +60,7 @@ abstract class HttpRequestImpl extends Request
     {
         if (TRUSTED_FACTORY == null)
         {
-            synchronized (HttpRequestImpl.class)
+            synchronized (BaseRequest.class)
             {
                 if (TRUSTED_FACTORY == null)
                     TRUSTED_FACTORY = SSLSocketFactoryProvider.getTrustedFactory();
@@ -76,7 +76,7 @@ abstract class HttpRequestImpl extends Request
         return url + " " + super.toString();
     }
 
-    static class Response implements IResponse
+    public static class Response implements IResponse
     {
         private HttpRequest mHttpRequest;
         private String mBody;
