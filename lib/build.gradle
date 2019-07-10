@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 20190627
-        versionName "1.1.11"
+        versionCode 20190710
+        versionName "1.1.12"
     }
 
     buildTypes {
@@ -26,7 +26,7 @@ android {
 }
 
 dependencies {
-    api 'com.github.zj565061763:http:1.1.11'
+    api 'com.github.zj565061763:http:1.1.12'
 }
 
 // 指定编码
