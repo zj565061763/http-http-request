@@ -1,5 +1,5 @@
 ## About
-本库的底层Http功能是用[http-request](https://github.com/kevinsawicki/http-request)这个库来实现的
+Deprecated，已废弃，功能移到[这里](https://github.com/zj565061763/http)
 
 ## Gradle
 [![](https://jitpack.io/v/zj565061763/http-http-request.svg)](https://jitpack.io/#zj565061763/http-http-request)
